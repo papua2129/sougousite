@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>わくわく総合ラボ | 校内研究サポート</title>
+    <meta
+      name="description"
+      content="小学校の校内研究で使える、総合的な学習の時間を充実させるためのかわいくおしゃれな実践サイトです。"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <nav class="nav container">
+        <div class="brand">🌼 わくわく総合ラボ</div>
+        <button id="menuButton" class="menu-button" aria-label="メニューを開く">☰</button>
+        <ul id="menuList" class="menu-list">
+          <li><a href="#vision">めざす姿</a></li>
+          <li><a href="#cycle">探究サイクル</a></li>
+          <li><a href="#ideas">実践アイデア</a></li>
+          <li><a href="#tools">校内研ツール</a></li>
+        </ul>
+      </nav>
+
+      <div class="hero-content container">
+        <p class="chip">校内研究 × 総合的な学習の時間</p>
+        <h1>子どもの「知りたい！」があふれる<br />総合学習をつくろう</h1>
+        <p>
+          このサイトは、先生方の校内研究を支えるための実践共有ページです。<br />
+          すぐ使える活動例・ふり返り・評価の視点を、やさしくかわいいデザインでまとめました。
+        </p>
+        <a class="cta" href="#ideas">実践アイデアを見る</a>
+      </div>
+      <div class="wave" aria-hidden="true"></div>
+    </header>
+
+    <main>
+      <section id="vision" class="section container card-grid two">
+        <article class="card soft">
+          <h2>🎯 研究テーマ例</h2>
+          <p>「地域とかかわり、問い続ける子どもを育てる総合的な学習の時間」</p>
+          <ul>
+            <li>自分で課題を見つける力</li>
+            <li>協働して学びを深める力</li>
+            <li>学びを社会へつなげる表現力</li>
+          </ul>
+        </article>
+        <article class="card accent">
+          <h2>🧭 めざす授業づくり</h2>
+          <div class="tags">
+            <span>主体性</span>
+            <span>対話</span>
+            <span>協働</span>
+            <span>振り返り</span>
+          </div>
+          <p>
+            「先生が教える時間」から「子どもが探究する時間」へ。問い・情報収集・整理分析・表現を往還できる単元設計を重視します。
+          </p>
+        </article>
+      </section>
+
+      <section id="cycle" class="section pastel">
+        <div class="container">
+          <h2>🔄 探究サイクル（4ステップ）</h2>
+          <div class="step-grid">
+            <article class="step">
+              <h3>1. 問いをもつ</h3>
+              <p>身近な不思議から「なぜ？」「どうしたら？」を見つける。</p>
+            </article>
+            <article class="step">
+              <h3>2. 調べる・体験する</h3>
+              <p>インタビュー、見学、実験で情報を集める。</p>
+            </article>
+            <article class="step">
+              <h3>3. つなぐ・考える</h3>
+              <p>似ていること・違うことを比べ、考えを深める。</p>
+            </article>
+            <article class="step">
+              <h3>4. 伝える・ふり返る</h3>
+              <p>発表し、学び方や次の問いを見つける。</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="ideas" class="section container">
+        <h2>✨ すぐ使える実践アイデア</h2>
+        <div class="idea-grid">
+          <article class="idea-card">
+            <h3>3年生：町たんけんマップ</h3>
+            <p>地域の「すてき」を調査し、デジタル地図にまとめる活動。</p>
+            <button class="toggle" data-target="idea1">詳しく見る</button>
+            <div id="idea1" class="detail">
+              学習材：インタビューカード／写真記録シート／発表ポスター
+            </div>
+          </article>
+          <article class="idea-card">
+            <h3>4年生：エコプロジェクト</h3>
+            <p>学校のごみ課題を見つけ、改善提案を実践する活動。</p>
+            <button class="toggle" data-target="idea2">詳しく見る</button>
+            <div id="idea2" class="detail">
+              学習材：ごみ量チェック表／提案書テンプレート／ビフォーアフター記録
+            </div>
+          </article>
+          <article class="idea-card">
+            <h3>5年生：防災ミッション</h3>
+            <p>地域の防災を調査し、自分たちにできる備えを発信する活動。</p>
+            <button class="toggle" data-target="idea3">詳しく見る</button>
+            <div id="idea3" class="detail">
+              学習材：ハザードマップ読解ワーク／地域連携インタビュー／啓発リーフレット
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="tools" class="section container card-grid three">
+        <article class="card">
+          <h3>📝 単元設計チェック</h3>
+          <p>問いの質・体験の量・表現の場の3観点で授業を見直せます。</p>
+        </article>
+        <article class="card">
+          <h3>👀 授業参観メモ</h3>
+          <p>子どもの発話・行動の変容を記録し、協議を具体化します。</p>
+        </article>
+        <article class="card">
+          <h3>💬 ふり返りルーブリック</h3>
+          <p>「学び方の成長」を見取る、わかりやすい4段階評価です。</p>
+        </article>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>© 2026 わくわく総合ラボ | 校内研究サポートサイト</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

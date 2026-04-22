@@ -1,0 +1,232 @@
+:root {
+  --bg: #fffaf5;
+  --ink: #4f4f5a;
+  --pink: #ffd8e6;
+  --yellow: #ffe9b3;
+  --mint: #c7f2e3;
+  --purple: #e2d9ff;
+  --white: #ffffff;
+  --shadow: 0 10px 25px rgba(79, 79, 90, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Zen Maru Gothic", sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.7;
+}
+
+.container {
+  width: min(1060px, 92%);
+  margin: 0 auto;
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #fff0f7, #eef7ff 45%, #f6fff0);
+  padding-bottom: 4rem;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.1rem 0;
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.menu-button {
+  display: none;
+  border: 0;
+  border-radius: 12px;
+  padding: 0.45rem 0.7rem;
+  font-size: 1.2rem;
+  background: var(--white);
+}
+
+.menu-list {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu-list a {
+  text-decoration: none;
+  color: var(--ink);
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+}
+
+.hero-content {
+  text-align: center;
+  padding: 2.5rem 0 0;
+}
+
+.chip {
+  display: inline-block;
+  background: var(--mint);
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  line-height: 1.35;
+  margin: 1rem 0;
+}
+
+.cta {
+  display: inline-block;
+  margin-top: 1rem;
+  text-decoration: none;
+  background: #ff7fb0;
+  color: var(--white);
+  padding: 0.7rem 1.2rem;
+  border-radius: 999px;
+  box-shadow: var(--shadow);
+}
+
+.wave {
+  position: absolute;
+  inset: auto -10% -80px;
+  height: 160px;
+  background: var(--bg);
+  border-radius: 50% 50% 0 0;
+}
+
+.section {
+  padding: 3.5rem 0;
+}
+
+.card-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.card-grid.two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.card-grid.three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.card,
+.idea-card,
+.step {
+  background: var(--white);
+  border-radius: 18px;
+  padding: 1.2rem;
+  box-shadow: var(--shadow);
+}
+
+.card.soft {
+  background: #fff4f9;
+}
+
+.card.accent {
+  background: #f3fffb;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.tags span {
+  background: var(--purple);
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+}
+
+.pastel {
+  background: linear-gradient(180deg, #fff, #fffef6);
+}
+
+.step-grid,
+.idea-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.idea-card {
+  border: 2px dashed var(--pink);
+}
+
+.toggle {
+  margin-top: 0.4rem;
+  border: 0;
+  background: var(--yellow);
+  padding: 0.45rem 0.8rem;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.detail {
+  margin-top: 0.8rem;
+  display: none;
+  background: #fff7d9;
+  border-radius: 10px;
+  padding: 0.65rem;
+}
+
+.detail.open {
+  display: block;
+}
+
+.footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: #7a7a8a;
+}
+
+@media (max-width: 860px) {
+  .card-grid.two,
+  .card-grid.three,
+  .idea-grid,
+  .step-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .menu-button {
+    display: inline-block;
+  }
+
+  .menu-list {
+    position: absolute;
+    right: 4%;
+    top: 64px;
+    z-index: 20;
+    flex-direction: column;
+    background: var(--white);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    padding: 0.8rem;
+    display: none;
+  }
+
+  .menu-list.open {
+    display: flex;
+  }
+}
