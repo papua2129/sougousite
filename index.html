@@ -2,144 +2,654 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>わくわく総合ラボ | 校内研究サポート</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>元素図鑑｜118種類の「元素」を知ろう！</title>
     <meta
       name="description"
-      content="小学校の校内研究で使える、総合的な学習の時間を充実させるためのかわいくおしゃれな実践サイトです。"
+      content="小学生向けのかわいい元素図鑑。元素名・記号・分類・使われ方を楽しく学べるスマホ向けインフォグラフィック。"
     />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css" />
+    <style>
+      :root {
+        --bg-1: #fff9ec;
+        --bg-2: #f9f2ff;
+        --card: #ffffff;
+        --text: #4c4a54;
+        --muted: #7f7a8e;
+        --shadow: 0 10px 24px rgba(102, 81, 143, 0.12);
+        --radius-xl: 24px;
+        --radius-lg: 18px;
+        --line: #ece6f6;
+        --primary: #9f7aea;
+        --accent: #ff96ba;
+
+        --nonmetal: #98d7ff;
+        --noble: #c7b1ff;
+        --alkali: #ffb487;
+        --alkaline: #ffd98b;
+        --metalloid: #a9e79f;
+        --halogen: #89e7df;
+
+        --gas: #cfefff;
+        --liquid: #b7f4ff;
+        --solid: #ffeec2;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        overflow-x: hidden;
+        color: var(--text);
+        font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+        background: linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
+      }
+
+      .progress-wrap {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 8px;
+        background: rgba(255, 255, 255, 0.5);
+        z-index: 99;
+      }
+
+      .progress-bar {
+        height: 100%;
+        width: 0;
+        background: linear-gradient(90deg, #8cd6ff, #b894ff, #ff96ba);
+        transition: width 0.1s linear;
+      }
+
+      .app {
+        width: min(100%, 430px);
+        margin: 0 auto;
+        min-height: 100dvh;
+        padding: 18px 14px 92px;
+      }
+
+      section {
+        margin-top: 16px;
+      }
+
+      .card {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: var(--radius-xl);
+        box-shadow: var(--shadow);
+      }
+
+      .hero {
+        position: relative;
+        padding: 22px 18px;
+        overflow: hidden;
+      }
+
+      .hero h1 {
+        margin: 0;
+        color: #6f55aa;
+        font-size: 1.95rem;
+        letter-spacing: 0.03em;
+      }
+
+      .hero p {
+        margin: 10px 0 0;
+        line-height: 1.65;
+        font-size: 0.98rem;
+      }
+
+      .hero-sub {
+        margin-top: 8px;
+        display: inline-block;
+        background: #f3ebff;
+        border: 1px dashed #ceb8ff;
+        color: #7d5fc4;
+        border-radius: 999px;
+        padding: 6px 12px;
+        font-weight: 700;
+        font-size: 0.86rem;
+      }
+
+      .mascot {
+        margin-top: 12px;
+        font-size: 1.8rem;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .bubble {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.6);
+        border: 1px solid rgba(180, 160, 255, 0.25);
+      }
+
+      .b1 { width: 52px; height: 52px; top: -8px; right: 20px; }
+      .b2 { width: 26px; height: 26px; top: 42px; right: 66px; }
+      .b3 { width: 34px; height: 34px; bottom: 12px; right: 12px; }
+
+      .legend,
+      .guide,
+      .controls,
+      .pager,
+      .next-page {
+        padding: 16px;
+      }
+
+      h2 {
+        margin: 0 0 10px;
+        font-size: 1.25rem;
+        color: #664aa9;
+      }
+
+      .legend-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        width: 100%;
+        border-radius: 999px;
+        font-weight: 700;
+        font-size: 0.8rem;
+        padding: 7px 10px;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+      }
+
+      .guide ol {
+        margin: 0;
+        padding-left: 1.4em;
+        line-height: 1.8;
+      }
+
+      .guide strong {
+        color: #6844c2;
+      }
+
+      .controls {
+        display: grid;
+        gap: 10px;
+      }
+
+      .search {
+        width: 100%;
+        border: 1px solid #ddcfff;
+        border-radius: 14px;
+        font-size: 1rem;
+        padding: 11px 12px;
+      }
+
+      .filter-row {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .filter-btn {
+        border: 1px solid #dbc9ff;
+        background: #fff;
+        color: #6a4bb6;
+        border-radius: 999px;
+        padding: 8px 10px;
+        font-size: 0.82rem;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .filter-btn.active {
+        background: #efe4ff;
+        border-color: #a07be9;
+      }
+
+      .elements-grid {
+        margin-top: 14px;
+        display: grid;
+        gap: 12px;
+        grid-template-columns: 1fr;
+      }
+
+      .element-card {
+        border-left: 8px solid var(--nonmetal);
+        padding: 12px;
+        position: relative;
+      }
+
+      .element-head {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .number-badge {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: #f4eeff;
+        border: 2px solid #dbcfff;
+        display: grid;
+        place-items: center;
+        font-weight: 800;
+      }
+
+      .symbol {
+        font-size: 2.4rem;
+        line-height: 1;
+        font-weight: 800;
+        color: #5e419b;
+      }
+
+      .element-name {
+        margin: 2px 0 0;
+        font-size: 1.1rem;
+        font-weight: 800;
+      }
+
+      .emoji {
+        font-size: 1.8rem;
+      }
+
+      .mini-meta {
+        margin-top: 10px;
+        display: grid;
+        gap: 7px;
+      }
+
+      .meta-line {
+        font-size: 0.92rem;
+        line-height: 1.5;
+      }
+
+      .tag {
+        display: inline-block;
+        border-radius: 999px;
+        padding: 3px 9px;
+        font-weight: 700;
+        font-size: 0.78rem;
+        margin-right: 6px;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+      }
+
+      .detail-toggle {
+        margin-top: 10px;
+        border: none;
+        width: 100%;
+        border-radius: 12px;
+        padding: 10px;
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: #5e409f;
+        background: #f4eeff;
+        cursor: pointer;
+      }
+
+      .detail {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.32s ease;
+      }
+
+      .detail-inner {
+        margin-top: 10px;
+        border-top: 1px dashed #dbcfff;
+        padding-top: 10px;
+        font-size: 0.9rem;
+        line-height: 1.65;
+      }
+
+      .detail ul {
+        margin: 6px 0 0;
+        padding-left: 1.2em;
+      }
+
+      .pager {
+        margin-top: 16px;
+        text-align: center;
+        font-weight: 800;
+        font-size: 1rem;
+      }
+
+      .next-page {
+        margin-top: 12px;
+        text-align: center;
+        line-height: 1.7;
+      }
+
+      .top-btn {
+        position: fixed;
+        right: calc((100vw - min(100vw, 430px)) / 2 + 12px);
+        bottom: 16px;
+        border: none;
+        border-radius: 999px;
+        background: linear-gradient(135deg, #b593ff, #ff9cb9);
+        color: #fff;
+        font-weight: 800;
+        box-shadow: 0 8px 20px rgba(97, 52, 153, 0.25);
+        padding: 10px 14px;
+        cursor: pointer;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: opacity 0.2s, transform 0.2s;
+      }
+
+      .top-btn.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .fade {
+        opacity: 0;
+        transform: translateY(18px);
+        transition: opacity 0.65s ease, transform 0.65s ease;
+      }
+
+      .fade.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (min-width: 680px) {
+        .app { width: min(100%, 840px); }
+        .elements-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      }
+
+      @media (min-width: 980px) {
+        .app { width: min(100%, 1080px); }
+        .elements-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      }
+    </style>
   </head>
   <body>
-    <header class="hero">
-      <nav class="nav container">
-        <div class="brand">🌼 わくわく総合ラボ</div>
-        <button id="menuButton" class="menu-button" aria-label="メニューを開く">☰</button>
-        <ul id="menuList" class="menu-list">
-          <li><a href="#vision">めざす姿</a></li>
-          <li><a href="#cycle">探究サイクル</a></li>
-          <li><a href="#ideas">実践アイデア</a></li>
-          <li><a href="#tools">校内研ツール</a></li>
-        </ul>
-      </nav>
+    <div class="progress-wrap" aria-hidden="true"><div id="progressBar" class="progress-bar"></div></div>
 
-      <div class="hero-content container">
-        <p class="chip">校内研究 × 総合的な学習の時間</p>
-        <h1>子どもの「知りたい！」があふれる<br />総合学習をつくろう</h1>
-        <p>
-          このサイトは、先生方の校内研究を支えるための実践共有ページです。<br />
-          すぐ使える活動例・ふり返り・評価の視点を、やさしくかわいいデザインでまとめました。
-        </p>
-        <a class="cta" href="#ideas">実践アイデアを見る</a>
-      </div>
-      <div class="wave" aria-hidden="true"></div>
-    </header>
-
-    <main>
-      <section id="vision" class="section container card-grid two fade-in">
-        <article class="card soft fade-in">
-          <h2>🎯 研究テーマ例</h2>
-          <p>「地域とかかわり、問い続ける子どもを育てる総合的な学習の時間」</p>
-          <ul>
-            <li>自分で課題を見つける力</li>
-            <li>協働して学びを深める力</li>
-            <li>学びを社会へつなげる表現力</li>
-          </ul>
-        </article>
-        <article class="card accent fade-in delay-1">
-          <h2>🧭 めざす授業づくり</h2>
-          <div class="tags">
-            <span>主体性</span>
-            <span>対話</span>
-            <span>協働</span>
-            <span>振り返り</span>
-          </div>
-          <p>
-            「先生が教える時間」から「子どもが探究する時間」へ。問い・情報収集・整理分析・表現を往還できる単元設計を重視します。
-          </p>
-        </article>
+    <main class="app">
+      <section class="hero card fade">
+        <div class="bubble b1" aria-hidden="true"></div>
+        <div class="bubble b2" aria-hidden="true"></div>
+        <div class="bubble b3" aria-hidden="true"></div>
+        <h1>元素図鑑</h1>
+        <div class="hero-sub">118種類の「元素」を知ろう！</div>
+        <p>すべての物質は、<strong>元素</strong>からできているよ！ くまさん🐻とペンギン🐧といっしょに、たのしく学ぼう！</p>
+        <div class="mascot" aria-hidden="true">🐻‍❄️ 🐧 ⚗️ ⭐ 💗 🫧</div>
       </section>
 
-      <section id="cycle" class="section pastel fade-in">
-        <div class="container">
-          <h2>🔄 探究サイクル（4ステップ）</h2>
-          <div class="step-grid">
-            <article class="step fade-in">
-              <h3>1. 問いをもつ</h3>
-              <p>身近な不思議から「なぜ？」「どうしたら？」を見つける。</p>
-            </article>
-            <article class="step fade-in delay-1">
-              <h3>2. 調べる・体験する</h3>
-              <p>インタビュー、見学、実験で情報を集める。</p>
-            </article>
-            <article class="step fade-in delay-2">
-              <h3>3. つなぐ・考える</h3>
-              <p>似ていること・違うことを比べ、考えを深める。</p>
-            </article>
-            <article class="step fade-in delay-3">
-              <h3>4. 伝える・ふり返る</h3>
-              <p>発表し、学び方や次の問いを見つける。</p>
-            </article>
-          </div>
+      <section class="legend card fade" aria-label="凡例">
+        <h2>凡例（はんれい）</h2>
+        <div class="legend-grid">
+          <span class="pill" style="background: var(--alkali)">🟠 金属</span>
+          <span class="pill" style="background: var(--nonmetal)">🔵 非金属</span>
+          <span class="pill" style="background: var(--metalloid)">🟢 準金属</span>
+          <span class="pill" style="background: var(--noble)">🟣 希ガス</span>
+          <span class="pill" style="background: var(--gas)">☁️ 気体</span>
+          <span class="pill" style="background: var(--liquid)">💧 液体</span>
+          <span class="pill" style="background: var(--solid)">🧱 固体</span>
         </div>
       </section>
 
-      <section id="ideas" class="section container fade-in">
-        <h2 class="fade-in">✨ すぐ使える実践アイデア</h2>
-        <div class="idea-grid">
-          <article class="idea-card fade-in">
-            <h3>3年生：町たんけんマップ</h3>
-            <p>地域の「すてき」を調査し、デジタル地図にまとめる活動。</p>
-            <button class="toggle" data-target="idea1">詳しく見る</button>
-            <div id="idea1" class="detail">
-              学習材：インタビューカード／写真記録シート／発表ポスター
-            </div>
-          </article>
-          <article class="idea-card fade-in delay-1">
-            <h3>4年生：エコプロジェクト</h3>
-            <p>学校のごみ課題を見つけ、改善提案を実践する活動。</p>
-            <button class="toggle" data-target="idea2">詳しく見る</button>
-            <div id="idea2" class="detail">
-              学習材：ごみ量チェック表／提案書テンプレート／ビフォーアフター記録
-            </div>
-          </article>
-          <article class="idea-card fade-in delay-2">
-            <h3>5年生：防災ミッション</h3>
-            <p>地域の防災を調査し、自分たちにできる備えを発信する活動。</p>
-            <button class="toggle" data-target="idea3">詳しく見る</button>
-            <div id="idea3" class="detail">
-              学習材：ハザードマップ読解ワーク／地域連携インタビュー／啓発リーフレット
-            </div>
-          </article>
+      <section class="guide card fade">
+        <h2>この図鑑の見方</h2>
+        <ol>
+          <li><strong>① 元素名と記号</strong>をチェック！</li>
+          <li><strong>② 原子番号・原子量</strong>でちがいを見よう。</li>
+          <li><strong>③ 分類と状態</strong>でなかま分け。</li>
+          <li><strong>④ 特徴</strong>を1文で理解！</li>
+          <li><strong>⑤ 身近な例</strong>を2つ確認。</li>
+          <li><strong>⑥ 使われ方</strong>をひらいて調べよう。</li>
+        </ol>
+      </section>
+
+      <section class="controls card fade" aria-label="検索とフィルター">
+        <h2>さがしてみよう 🔎</h2>
+        <input id="searchBox" class="search" type="search" placeholder="元素名・記号・分類で検索（例: 酸素 / O / 非金属）" aria-label="元素検索" />
+        <div class="filter-row" id="filterRow" aria-label="分類フィルター">
+          <button class="filter-btn active" data-filter="すべて" aria-label="すべて表示">すべて</button>
+          <button class="filter-btn" data-filter="非金属" aria-label="非金属で絞り込み">非金属</button>
+          <button class="filter-btn" data-filter="希ガス" aria-label="希ガスで絞り込み">希ガス</button>
+          <button class="filter-btn" data-filter="アルカリ金属" aria-label="アルカリ金属で絞り込み">アルカリ金属</button>
+          <button class="filter-btn" data-filter="アルカリ土類金属" aria-label="アルカリ土類金属で絞り込み">アルカリ土類金属</button>
+          <button class="filter-btn" data-filter="準金属" aria-label="準金属で絞り込み">準金属</button>
+          <button class="filter-btn" data-filter="ハロゲン" aria-label="ハロゲンで絞り込み">ハロゲン</button>
         </div>
       </section>
 
-      <section id="tools" class="section container card-grid three fade-in">
-        <article class="card fade-in">
-          <h3>📝 単元設計チェック</h3>
-          <p>問いの質・体験の量・表現の場の3観点で授業を見直せます。</p>
-        </article>
-        <article class="card fade-in delay-1">
-          <h3>👀 授業参観メモ</h3>
-          <p>子どもの発話・行動の変容を記録し、協議を具体化します。</p>
-        </article>
-        <article class="card fade-in delay-2">
-          <h3>💬 ふり返りルーブリック</h3>
-          <p>「学び方の成長」を見取る、わかりやすい4段階評価です。</p>
-        </article>
+      <section class="fade">
+        <div id="elementsGrid" class="elements-grid" aria-live="polite"></div>
       </section>
+
+      <section class="pager card fade" aria-label="ページ番号">1 / 6</section>
+      <section class="next-page card fade">次のページでは、さらに12種類の元素を紹介するよ！</section>
     </main>
 
-    <footer class="footer">
-      <p>© 2026 わくわく総合ラボ | 校内研究サポートサイト</p>
-    </footer>
+    <button id="topBtn" class="top-btn" aria-label="上にもどる">⬆ 上にもどる</button>
 
-    <script src="script.js"></script>
+    <script>
+      const elements = [
+        {
+          name: "水素", symbol: "H", number: 1, weight: "1.008", category: "非金属", state: "気体",
+          feature: "宇宙でいちばん多く存在する、とても軽い元素。",
+          examples: ["水", "太陽"],
+          uses: ["ロケット燃料", "水素エネルギー", "化学製品の原料"],
+          art: "💧", fact: "水（H₂O）の材料として、くらしの中でも大活やく。"
+        },
+        {
+          name: "ヘリウム", symbol: "He", number: 2, weight: "4.0026", category: "希ガス", state: "気体",
+          feature: "空気より軽く、燃えたり反応したりしにくい安全な気体。",
+          examples: ["風船", "ヘリウムガス"],
+          uses: ["風船をふくらませる", "気球", "MRIなどの冷却材"],
+          art: "🎈", fact: "声が高く聞こえる実験でも有名だけど、吸いすぎは危険だよ。"
+        },
+        {
+          name: "リチウム", symbol: "Li", number: 3, weight: "6.94", category: "アルカリ金属", state: "固体",
+          feature: "とても軽くてやわらかい金属。",
+          examples: ["充電式電池", "携帯ゲーム機"],
+          uses: ["リチウムイオン電池", "薬の材料", "ガラスや陶器の原料"],
+          art: "🔋", fact: "スマホやタブレットの電池でも、リチウムが大活やく！"
+        },
+        {
+          name: "ベリリウム", symbol: "Be", number: 4, weight: "9.0122", category: "アルカリ土類金属", state: "固体",
+          feature: "軽くて丈夫だが、扱いには注意が必要な金属。",
+          examples: ["宝石", "宇宙の岩石"],
+          uses: ["航空機の部品", "X線の窓", "宇宙機器の材料"],
+          art: "💎", fact: "かるくて強いので、宇宙開発にも使われているよ。"
+        },
+        {
+          name: "ホウ素", symbol: "B", number: 5, weight: "10.81", category: "準金属", state: "固体",
+          feature: "熱や電気を通しにくい性質をもつ元素。",
+          examples: ["ホウ砂", "ガラス"],
+          uses: ["ガラスやセラミックの材料", "洗剤", "農業の原料"],
+          art: "🧪", fact: "ホウ素入りガラスは、熱に強くてわれにくい！"
+        },
+        {
+          name: "炭素", symbol: "C", number: 6, weight: "12.011", category: "非金属", state: "固体",
+          feature: "すべての生き物の体をつくる、とても大切な元素。",
+          examples: ["鉛筆の芯", "ダイヤモンド"],
+          uses: ["燃料", "プラスチック", "ダイヤモンドの研磨"],
+          art: "✏️", fact: "同じ炭素でも、すがたが変わると性質が大きく変わるよ。"
+        },
+        {
+          name: "窒素", symbol: "N", number: 7, weight: "14.007", category: "非金属", state: "気体",
+          feature: "空気の約78％をしめる、身近な気体。",
+          examples: ["空気", "肥料"],
+          uses: ["肥料", "冷凍食品の保存", "液体窒素による冷却"],
+          art: "☁️", fact: "液体窒素はとても低温で、実験や保存に使われるよ。"
+        },
+        {
+          name: "酸素", symbol: "O", number: 8, weight: "15.999", category: "非金属", state: "気体",
+          feature: "ものを燃やすはたらきを助け、生き物の呼吸に必要な元素。",
+          examples: ["空気", "水"],
+          uses: ["医療用酸素", "鉄を燃やす実験", "化学工業の原料"],
+          art: "🫧", fact: "人や動物の呼吸だけでなく、燃焼にもかかわる元素。"
+        },
+        {
+          name: "フッ素", symbol: "F", number: 9, weight: "18.998", category: "ハロゲン", state: "気体",
+          feature: "とても反応しやすく、強い性質をもつ元素。",
+          examples: ["歯みがき粉", "フッ素加工"],
+          uses: ["むし歯予防", "フッ素樹脂", "表面加工"],
+          art: "🪥", fact: "歯をじょうぶにする目的で、身近な製品にも使われるよ。"
+        },
+        {
+          name: "ネオン", symbol: "Ne", number: 10, weight: "20.180", category: "希ガス", state: "気体",
+          feature: "とても安定していて、ほかの元素と反応しにくい元素。",
+          examples: ["ネオンサイン", "電光掲示板"],
+          uses: ["ネオンサイン", "高電圧ランプ", "表示装置"],
+          art: "💡", fact: "電気を通すと、きれいな光を出すことで有名だよ。"
+        },
+        {
+          name: "ナトリウム", symbol: "Na", number: 11, weight: "22.990", category: "アルカリ金属", state: "固体",
+          feature: "水とよく反応して、熱や光を出すことがある金属。",
+          examples: ["食塩", "海の水"],
+          uses: ["食塩", "石けんの原料", "ナトリウムランプ"],
+          art: "🧂", fact: "食塩（NaCl）は、ナトリウムと塩素でできているよ。"
+        },
+        {
+          name: "マグネシウム", symbol: "Mg", number: 12, weight: "24.305", category: "アルカリ土類金属", state: "固体",
+          feature: "軽くて丈夫で、燃えるとまぶしい光を出す金属。",
+          examples: ["花火", "金属のかたまり"],
+          uses: ["花火", "飛行機や車の部品", "マグネシウム合金"],
+          art: "🎆", fact: "軽い金属なので、乗り物を軽量化したい時に便利。"
+        }
+      ];
+
+      const categoryColor = {
+        "非金属": "var(--nonmetal)",
+        "希ガス": "var(--noble)",
+        "アルカリ金属": "var(--alkali)",
+        "アルカリ土類金属": "var(--alkaline)",
+        "準金属": "var(--metalloid)",
+        "ハロゲン": "var(--halogen)"
+      };
+
+      const stateColor = {
+        "気体": "var(--gas)",
+        "液体": "var(--liquid)",
+        "固体": "var(--solid)"
+      };
+
+      const grid = document.getElementById("elementsGrid");
+      const searchBox = document.getElementById("searchBox");
+      const filterRow = document.getElementById("filterRow");
+      const progressBar = document.getElementById("progressBar");
+      const topBtn = document.getElementById("topBtn");
+
+      let activeFilter = "すべて";
+      let query = "";
+
+      function renderCards() {
+        const filtered = elements.filter((el) => {
+          const byFilter = activeFilter === "すべて" || el.category === activeFilter;
+          const source = `${el.name} ${el.symbol} ${el.category}`.toLowerCase();
+          const byQuery = source.includes(query.toLowerCase());
+          return byFilter && byQuery;
+        });
+
+        grid.innerHTML = filtered.map((el, idx) => {
+          const id = `d-${el.symbol}-${idx}`;
+          return `
+          <article class="element-card card fade" style="border-left-color:${categoryColor[el.category] || 'var(--nonmetal)'}">
+            <div class="element-head">
+              <div class="number-badge" aria-label="原子番号 ${el.number}">${el.number}</div>
+              <div>
+                <div class="symbol" aria-label="元素記号 ${el.symbol}">${el.symbol}</div>
+                <p class="element-name">${el.name}</p>
+              </div>
+              <div class="emoji" aria-hidden="true">${el.art}</div>
+            </div>
+
+            <div class="mini-meta">
+              <div class="meta-line"><strong>原子量：</strong>${el.weight}</div>
+              <div class="meta-line"><span class="tag" style="background:${categoryColor[el.category]}">分類：${el.category}</span><span class="tag" style="background:${stateColor[el.state]}">状態：${el.state}</span></div>
+              <div class="meta-line"><strong>特徴：</strong>${el.feature}</div>
+              <div class="meta-line"><strong>身近な例：</strong>${el.examples.join("、")}</div>
+            </div>
+
+            <button class="detail-toggle" data-target="${id}" aria-expanded="false" aria-controls="${id}" aria-label="${el.name}の詳細を開閉">くわしく見る ▼</button>
+            <div id="${id}" class="detail">
+              <div class="detail-inner">
+                <strong>使われ方：</strong>
+                <ul>${el.uses.map((u) => `<li>${u}</li>`).join("")}</ul>
+                <p><strong>豆ちしき：</strong>${el.fact}</p>
+              </div>
+            </div>
+          </article>`;
+        }).join("");
+
+        setupAccordion();
+        observeFade();
+      }
+
+      function setupAccordion() {
+        document.querySelectorAll(".detail-toggle").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const panel = document.getElementById(btn.dataset.target);
+            const expanded = btn.getAttribute("aria-expanded") === "true";
+            btn.setAttribute("aria-expanded", String(!expanded));
+            btn.textContent = expanded ? "くわしく見る ▼" : "とじる ▲";
+            panel.style.maxHeight = expanded ? "0px" : `${panel.scrollHeight + 8}px`;
+          });
+        });
+      }
+
+      filterRow.addEventListener("click", (e) => {
+        const btn = e.target.closest("button[data-filter]");
+        if (!btn) return;
+        activeFilter = btn.dataset.filter;
+        filterRow.querySelectorAll(".filter-btn").forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        renderCards();
+      });
+
+      searchBox.addEventListener("input", (e) => {
+        query = e.target.value.trim();
+        renderCards();
+      });
+
+      function updateProgress() {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const percent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        progressBar.style.width = `${Math.min(100, Math.max(0, percent))}%`;
+      }
+
+      function toggleTopBtn() {
+        topBtn.classList.toggle("show", window.scrollY > 350);
+      }
+
+      topBtn.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      function observeFade() {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("show");
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll(".fade:not(.show)").forEach((el) => io.observe(el));
+      }
+
+      window.addEventListener("scroll", () => {
+        updateProgress();
+        toggleTopBtn();
+      }, { passive: true });
+
+      renderCards();
+      observeFade();
+      updateProgress();
+    </script>
   </body>
 </html>
